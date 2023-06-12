@@ -246,6 +246,182 @@ app.delete("/eliminarCategoria/:codigo_categoria", (req, res) => {
     });
 });
 
+
+//METODOS CRUD CLIENTE
+//metodo guardar cliente 
+app.post("/crearCliente", (req, res) => {
+    const id_cliente = req.body.id_cliente;
+    const nombre = req.body.nombre;
+    const direccion = req.body.direccion;
+    const telefono = req.body.telefono;
+    
+
+    db.query("INSERT INTO cliente(id_cliente,nombre,direccion,telefono)  VALUES (?,?,?,?)",[id_cliente, nombre, direccion, telefono], (err, result) => {
+        if (err) {
+            console.log(err);
+        } else {
+            res.send(result);
+        }
+    });
+});
+
+//metodo listar cliente
+app.get("/listarCliente", (req, res) => {
+    
+    db.query("SELECT * FROM cliente", (err, result) => {
+        if (err) {
+            console.log(err);
+        } else {
+            res.send(result);
+        }
+    });
+});
+
+//metodo actualizar cliente
+app.put("/actualizarCliente", (req, res) => {
+    const id_cliente = req.body.id_cliente;
+    const nombre = req.body.nombre;
+    const direccion = req.body.direccion;
+    const telefono = req.body.telefono;
+
+    db.query("UPDATE cliente SET nombre=?, direccion= ?,telefono=? WHERE id_cliente=?",[nombre,direccion,telefono,id_cliente], (err, result) => {
+        if (err) {
+            console.log(err + " no se puede");
+        } else {
+            res.send(result);
+        }
+    });
+});
+//metodo eliminar cliente
+app.delete("/eliminarCliente/:id_cliente", (req, res) => {
+    const id_cliente = req.params.id_cliente;
+
+    db.query("DELETE FROM cliente WHERE id_cliente=?",id_cliente, (err, result) => {
+        if (err) {
+            console.log(err + " no se puede");
+        } else {
+            res.send(result);
+        }
+    });
+});
+
+
+//METODOS CRUD VENTA
+//metodo guardar venta 
+app.post("/crearVenta", (req, res) => {
+    const codigo_venta = req.body.codigo_venta;
+    const id_producto = req.body.id_producto;
+    const codigo_factura = req.body.codigo_factura;
+    const cantidad = req.body.cantidad;
+    
+
+    db.query("INSERT INTO venta(codigo_venta,id_producto,codigo_factura,cantidad)  VALUES (?,?,?,?)",[codigo_venta, id_producto, codigo_factura, cantidad], (err, result) => {
+        if (err) {
+            console.log(err);
+        } else {
+            res.send(result);
+        }
+    });
+});
+
+//metodo listar venta
+app.get("/listarVenta", (req, res) => {
+    
+    db.query("SELECT * FROM venta", (err, result) => {
+        if (err) {
+            console.log(err);
+        } else {
+            res.send(result);
+        }
+    });
+});
+
+//metodo actualizar venta
+app.put("/actualizarVenta", (req, res) => {
+    const codigo_venta = req.body.codigo_venta;
+    const id_producto = req.body.id_producto;
+    const codigo_factura = req.body.codigo_factura;
+    const cantidad = req.body.cantidad;
+
+    db.query("UPDATE venta SET id_producto=?, codigo_factura= ?,cantidad=? WHERE codigo_venta=?",[id_producto,codigo_factura,cantidad,codigo_venta], (err, result) => {
+        if (err) {
+            console.log(err + " no se puede");
+        } else {
+            res.send(result);
+        }
+    });
+});
+//metodo eliminar venta
+app.delete("/eliminarVenta/:codigo_venta", (req, res) => {
+    const codigo_venta = req.params.codigo_venta;
+
+    db.query("DELETE FROM venta WHERE codigo_venta=?",codigo_venta, (err, result) => {
+        if (err) {
+            console.log(err + " no se puede");
+        } else {
+            res.send(result);
+        }
+    });
+});
+
+
+//METODOS CRUD FACTURA
+//metodo guardar factura 
+app.post("/crearFactura", (req, res) => {
+    const codigo_factura = req.body.codigo_factura;
+    const fecha = req.body.fecha;
+    const id_cliente = req.body.id_cliente;
+    
+    
+
+    db.query("INSERT INTO factura(codigo_factura,fecha,id_cliente)  VALUES (?,?,?)",[codigo_factura, fecha, id_cliente], (err, result) => {
+        if (err) {
+            console.log(err);
+        } else {
+            res.send(result);
+        }
+    });
+});
+
+//metodo listar factura
+app.get("/listarFactura", (req, res) => {
+    
+    db.query("SELECT * FROM factura", (err, result) => {
+        if (err) {
+            console.log(err);
+        } else {
+            res.send(result);
+        }
+    });
+});
+
+//metodo actualizar factura
+app.put("/actualizarFactura", (req, res) => {
+    const codigo_factura = req.body.codigo_factura;
+    const fecha = req.body.fecha;
+    const id_cliente = req.body.id_cliente;
+
+    db.query("UPDATE factura SET fecha=?, id_cliente= ? WHERE codigo_factura=?",[fecha,id_cliente,codigo_factura], (err, result) => {
+        if (err) {
+            console.log(err + " no se puede");
+        } else {
+            res.send(result);
+        }
+    });
+});
+//metodo eliminar factura
+app.delete("/eliminarFactura/:codigo_factura", (req, res) => {
+    const codigo_factura = req.params.codigo_factura;
+
+    db.query("DELETE FROM factura WHERE codigo_factura=?",codigo_factura, (err, result) => {
+        if (err) {
+            console.log(err + " no se puede");
+        } else {
+            res.send(result);
+        }
+    });
+});
+
 app.listen(3001, () => {
     console.log("corriendo en el puerto 3001")
 })

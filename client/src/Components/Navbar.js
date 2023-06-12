@@ -41,6 +41,27 @@ export const Navbar = () => {
                                 Categoria
                             </NavLink>
                         </li>
+                        <li className="nav-item">
+                            <NavLink 
+                                className={ ({ isActive }) => `nav-link ${ isActive ? 'active' : '' }` } 
+                                to="/cliente">
+                                Cliente
+                            </NavLink>
+                        </li>
+                        <li className="nav-item">
+                            <NavLink 
+                                className={ ({ isActive }) => `nav-link ${ isActive ? 'active' : '' }` } 
+                                to="/venta">
+                                Venta
+                            </NavLink>
+                        </li>
+                        <li className="nav-item">
+                            <NavLink 
+                                className={ ({ isActive }) => `nav-link ${ isActive ? 'active' : '' }` } 
+                                to="/factura">
+                                Factura
+                            </NavLink>
+                        </li>
                     </ul>
                 </div>
             </div>
